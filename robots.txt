@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://canyingwushang.github.io/sitemap.xml 

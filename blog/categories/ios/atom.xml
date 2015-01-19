@@ -1,97 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>残影无伤</title>
-  <meta name="author" content="残影无伤·张超">
-
-  
-  <meta name="description" content="最近在日常开发中经常会使用这样的代码处理流程：
-1. 根据字串获取对应的Selector
-2. 根据Selector使用instanceMethodSignatureForSelector方法获取指定方法签名
-3. 根据方法签名从集合中获取方法实参， &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://canyingwushang.github.io/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="残影无伤" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="/stylesheets/google_font_Serif.css" rel="stylesheet" type="text/css">
-<link href="/stylesheets/google_font_Sans.css" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">残影无伤</a></h1>
-  
-    <h2>记录技术的脚印.Keep Moving</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="canyingwushang.github.io">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">首页</a></li>
-  <li><a href="/blog/archives">所有文章</a></li>
-  <li><a href="/blog/categories/iOS">iOS开发</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Category: Ios | 残影无伤]]></title>
+  <link href="http://canyingwushang.github.io/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://canyingwushang.github.io/"/>
+  <updated>2015-01-19T14:07:38+08:00</updated>
+  <id>http://canyingwushang.github.io/</id>
+  <author>
+    <name><![CDATA[残影无伤·张超]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/11/iosde-fang-fa-qian-ming-wen-ti/">Objective-C的方法签名问题</a></h1>
-    
-    
-      <p class="meta">
-        
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
-
-
-
-<time class='entry-date' datetime='2015-01-11T17:56:46+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:56 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><br>
+  
+  <entry>
+    <title type="html"><![CDATA[Objective-C的方法签名问题]]></title>
+    <link href="http://canyingwushang.github.io/blog/2015/01/11/iosde-fang-fa-qian-ming-wen-ti/"/>
+    <updated>2015-01-11T17:56:46+08:00</updated>
+    <id>http://canyingwushang.github.io/blog/2015/01/11/iosde-fang-fa-qian-ming-wen-ti</id>
+    <content type="html"><![CDATA[<p><br>
 最近在日常开发中经常会使用这样的代码处理流程：<br>
 1. 根据字串获取对应的Selector<br>
 2. 根据Selector使用<b>instanceMethodSignatureForSelector</b>方法获取指定方法签名<br>
@@ -237,66 +164,7 @@ NSLog(@"factory class: %@, instance class: %@", [factory class], [theInstance cl
 
 <p>Posted by 张超  ·&nbsp;&nbsp;Jan 18th, 2015 <br>
 原创文章，版权声明：自由转载-非商用-非衍生-保持署名</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2015/01/11/iosde-fang-fa-qian-ming-wen-ti/">Objective-C的方法签名问题</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
- <section>
-  <h1>关于我</h1>
-  <p>花名: 残影无伤</p>
-  <p>iOS Developer, 现就职于百度, 负责<a href="https://itunes.apple.com/cn/app/shou-ji-bai-du-zui-hao-yong/id382201985?mt=8">手机百度iOS客户端</a>的开发</p>
-  <p>多年前，也曾搞过Mac和Windows客户端，搞过网站，也曾创过业.</p>
-  <p>欢迎关注我的新浪微博:<a href="http://weibo.com/coffeeking" target='_blank'><strong>_残影无伤_</strong></a></p>
-  <p>关注我的微信公共号还将会在第一时间收到我的精彩分享:<br><img width="258px" src="/images/qrcode_wechat.jpg"/></p>
-  
- </section>
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - 残影无伤·张超 -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</feed>
