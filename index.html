@@ -111,7 +111,9 @@ NSLog(@"%@", [[NSString new] methodSignatureForSelector:selector1]);
 
 <p>为了一探究竟,笔者又尝试打印了下NSString的实例方法respondsToSelector的返回值，结果是NO。意思就是NSString的实例不能响应这个消息。随即看了下respondsToSelector的官方文档，但却有这样一句话：</p>
 
-<pre><code>Note that if the receiver is able to forward aSelector messages to another object, it   will be able to respond to the message, albeit indirectly, even though this method  returns NO.
+<pre><code>Note that if the receiver is able to forward aSelector messages to another object, it 
+will be able to respond to the message, albeit indirectly, even though this method 
+returns NO.
 </code></pre>
 
 <p>翻译一下：如果the receiver能通过消息转发的机制把自己无法响应的消息转给另外一个对象，那么我们仍然认为the receiver是可以响应该消息的，间接响应。但是，respondsToSelector依旧返回NO。</p>
@@ -122,7 +124,15 @@ NSLog(@"%@", [[NSString new] methodSignatureForSelector:selector1]);
 
 <p>有1个函数值的我们注意：<b> forwardInvocation: </b>. 这里完整解释下OC消息处理的整个过程，如下：<br><br></p>
 
-<pre><code>消息转发分为两大阶段。第一阶段先征询接收者，所属的类，看其是否能动态添加方法，以处理当前这个“未知的选择    子”（unknown selector），这叫做“动态方法解析”（dynamic method resolution）。第二阶段涉及“完整的    消息转发机制”（full forwarding mechanism）。如果运行期系统已经把第一阶段执行完了，那么接收者自己就    无法再以动态新增方法的手段来响应包含该选择子的消息了。此时，运行期系统会请求接收者以其他手段来处理与消息    相关的方法调用。这又细分为两小步。首先，请接收者看看有没有其他对象能处理这条消息。若有，则运行期系统会把    消息转给那个对象，于是消息转发过程结束，一切如常。若没有“备援的接收者”（replacement receiver），则启 动完整的消息转发机制，运行期系统会把与消息有关的全部细节都封装到NSInvocation对象中，再给接收者最后一次 机会，令其设法解决当前还未处理的这条消息。如果还是不能处理该方法，最后会抛出大家很熟悉的异常  NSInvalidArgumentException，具体为unrecognized selector sent to instance xxxx.
+<pre><code>消息转发分为两大阶段。第一阶段先征询接收者，所属的类，看其是否能动态添加方法，以处理当前这个“未知的选择
+子”（unknown selector），这叫做“动态方法解析”（dynamic method resolution）。第二阶段涉及“完整的
+消息转发机制”（full forwarding mechanism）。如果运行期系统已经把第一阶段执行完了，那么接收者自己就
+无法再以动态新增方法的手段来响应包含该选择子的消息了。此时，运行期系统会请求接收者以其他手段来处理与消息
+相关的方法调用。这又细分为两小步。首先，请接收者看看有没有其他对象能处理这条消息。若有，则运行期系统会把
+消息转给那个对象，于是消息转发过程结束，一切如常。若没有“备援的接收者”（replacement receiver），则启
+动完整的消息转发机制，运行期系统会把与消息有关的全部细节都封装到NSInvocation对象中，再给接收者最后一次
+机会，令其设法解决当前还未处理的这条消息。如果还是不能处理该方法，最后会抛出大家很熟悉的异常
+NSInvalidArgumentException，具体为unrecognized selector sent to instance xxxx.
 </code></pre>
 
 <p>那么上面提到的函数则是处于第二阶段第二步，那好办了，我们可以在NSString的forwardInvocation：方法上打一个符号断点，看看到底能不能断下来。</p>
@@ -134,8 +144,10 @@ NSLog(@"%@", [[NSString new] methodSignatureForSelector:selector1]);
 
 <p>执行完成上述lldb的命令后，会有如下输出：</p>
 
-<pre><code>Setting a breakpoint at -[NSObject forwardInvocation:] with condition   (void*)object_getClass((id)$rdi) == 0x000000010b377e90
-Breakpoint 2: where = libobjc.A.dylib`-[NSObject forwardInvocation:], address =     0x000000010b4da2ea
+<pre><code>Setting a breakpoint at -[NSObject forwardInvocation:] with condition
+(void*)object_getClass((id)$rdi) == 0x000000010b377e90
+Breakpoint 2: where = libobjc.A.dylib`-[NSObject forwardInvocation:], address = 
+0x000000010b4da2ea
 </code></pre>
 
 <p>其实就跟我们使用XCode提供的<b>Add Symbolic Exception</b>添加一个条件断点没啥区别。<br></p>
@@ -152,12 +164,13 @@ Breakpoint 2: where = libobjc.A.dylib`-[NSObject forwardInvocation:], address = 
 <p>为了简单方便，笔者决定逆向iOS库的模拟器版本，开搞，执行命令查看Foundation.framework的位置：</p>
 
 <pre><code>cd /Applications/Xcode-Beta.app/
+
 find . -name Foundation.framework
 </code></pre>
 
 <p>得到如下：</p>
 
-<pre><code>./Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/  System/Library/Frameworks/Foundation.framework
+<pre><code>./Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/Foundation.framework
 </code></pre>
 
 <p>将Foundation.framework拷贝到外面的某个位置，打开<b>Hopper</b>，逆向之。<br></p>
@@ -174,8 +187,10 @@ find . -name Foundation.framework
 
 <p>输出如下：</p>
 
-<pre><code>Setting a breakpoint at -[NSPlaceholderString initWithBytes:length:encoding:] with  condition (void*)object_getClass((id)$rdi) == 0x000000010bd48f08
-Breakpoint 2: where = Foundation`-[NSPlaceholderString initWithBytes:length:encoding:],     address = 0x000000010b9faf1c
+<pre><code>Setting a breakpoint at -[NSPlaceholderString initWithBytes:length:encoding:] with 
+condition (void*)object_getClass((id)$rdi) == 0x000000010bd48f08
+Breakpoint 2: where = Foundation`-[NSPlaceholderString initWithBytes:length:encoding:], 
+address = 0x000000010b9faf1c
 </code></pre>
 
 <p>断点设置有效。运行文初的代码看效果，果然断点被fire了。</p>
